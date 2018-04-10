@@ -1,13 +1,14 @@
-
+<%require 'pry'%>
 
 <h1> Tools For School </h1>
 
 
 <% @categories.each do |category|%>
-  <h4> <%= category.name %> </h4> <br>
-    <% category.see_two.each do |supply|%>
-      <p> <%= "#{supply.name} | #{supply.price}"
+<% if category.supplies.length >= 1 %>
+  <h4> <%= category.name %> </h4>
+    <% see_two(category).each do |supply|%>
+      <p> <%= "#{supply.name} | $#{supply.price}"%> </p>
     <%end%>
-    <br>
-    <%= link_to "See More", category_path(category)%> 
+    <%= link_to "See More", category_path(category)%><br>
+  <%end%>
 <%end%>
