@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'categories#home'
+  
   resources :categories
   resources :supplies
   devise_for :users
