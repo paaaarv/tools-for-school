@@ -3,7 +3,11 @@ class SuppliesController < ApplicationController
 
 
   def new
-    @supply = Supply.new
+    if current_user.admin?
+      @supply = Supply.new
+    else
+      redirect_to '/'
+    end
   end
 
   def create
@@ -15,7 +19,7 @@ class SuppliesController < ApplicationController
     @supply.find(params[:id])
     @supply.update(supply_params)
     redirect_to '/'
-  end 
+  end
 
   def donate
     @supply = Supply.find(params[:id])
