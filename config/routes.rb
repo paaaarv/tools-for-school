@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'categories#home'
 
   resources :categories do
-    resources :supplies, only: [:show] do
+    resources :supplies, only: [:new, :show] do
       put '/donate' => "supply#donate"
     end
   end
