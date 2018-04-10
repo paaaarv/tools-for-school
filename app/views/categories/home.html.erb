@@ -5,4 +5,9 @@
 
 <% @categories.each do |category|%>
   <h4> <%= category.name %> </h4> <br>
+    <% category.see_two.each do |supply|%>
+      <p> <%= "#{supply.name} | #{supply.price}"
+    <%end%>
+    <br>
+    <%= link_to "See More", category_path(category)%> 
 <%end%>
