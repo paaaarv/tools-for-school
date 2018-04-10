@@ -3,11 +3,11 @@
 <br>
 
 <%= @category.supplies.each do |supply|%>
-<h3> <%= "#{supply.name} | #{supply.amount_to_goal}" %> </h3>
+<h3> <%= "#{supply.name} | #{amount_to_goal(supply)}" %> </h3>
 <p> Price: <%= supply.price%> </p>
 <p> Quantity: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
-<%= form_for supply do |f|%>
+<%= form_for supply, url: category_supply_path(@category,supply) do |f|%>
   <%= f.text_field :donations%>
   <%=f.submit "Donate now!"%>
   <%end%>

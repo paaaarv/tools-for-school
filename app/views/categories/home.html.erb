@@ -7,7 +7,7 @@
 <% if category.supplies.length >= 1 %>
   <h4> <%= category.name %> </h4>
     <% see_two(category).each do |supply|%>
-      <p> <%= "#{supply.name} | $#{supply.price} | #{supply.amount_to_goal}"%> </p>
+      <p> <%= "#{supply.name} | $#{supply.price} | #{amount_to_goal(supply)}"%> </p>
     <%end%>
     <%= link_to "See More", category_path(category)%><br>
   <%end%>

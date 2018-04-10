@@ -4,8 +4,4 @@ class Supply < ActiveRecord::Base
 
 
 
-  def amount_to_goal
-    goal = self.price * self.quantity
-    "$#{self.donations} out of $#{goal} raised."
-  end
 end

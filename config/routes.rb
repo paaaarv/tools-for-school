@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
   root 'categories#home'
-  
-  resources :categories
+
+  resources :categories do
+    resources :supplies, only: [:update]
+  end
   resources :supplies
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
