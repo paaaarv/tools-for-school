@@ -11,6 +11,12 @@ class SuppliesController < ApplicationController
     redirect_to '/'
   end
 
+  def update
+    @supply.find(params[:id])
+    @supply.update(supply_params)
+    redirect_to '/'
+  end 
+
   def donate
     @supply = Supply.find(params[:id])
     donations = params[:supply][:donations].to_f
