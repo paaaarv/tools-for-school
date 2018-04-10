@@ -1,0 +1,17 @@
+
+<h1> Need a New Supply? </h1>
+
+
+<%= form_for @supply do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name%> <br><br>
+<%= f.label :price%>
+<%= f.text_field :price %> <br><br>
+<%= f.label :quantity %>
+<%= f.text_field :quantity %> <br><br>
+<%= f.label :description %>
+<%= f.text_area :description %> <br><br>
+<%= f.label :category %>
+<%= f.collection_select(:category_id, Category.all, :id, :name)%><br><br>
+<%= f.submit "Add Supply"%>
+<%end%>
