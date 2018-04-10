@@ -7,7 +7,7 @@
 <p> Price: <%= supply.price%> </p>
 <p> Quantity: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
-<%= form_for supply, url: category_supply_path(@category,supply) do |f|%>
+<%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
   <%= f.text_field :donations%>
   <%=f.submit "Donate now!"%>
   <%end%>

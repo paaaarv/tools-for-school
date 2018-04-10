@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'categories#home'
 
   resources :categories do
-    resources :supplies, only: [:update]
+    resources :supplies, only: [:show] do
+      put '/donate' => "supply#donate"
+    end
   end
   resources :supplies
   devise_for :users

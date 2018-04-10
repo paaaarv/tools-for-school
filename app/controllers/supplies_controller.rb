@@ -1,7 +1,7 @@
 require 'pry'
 class SuppliesController < ApplicationController
 
-  def update
+  def donate
     @supply = Supply.find(params[:id])
     donations = params[:supply][:donations].to_f
     @supply.donations += donations
