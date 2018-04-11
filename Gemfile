@@ -31,3 +31,4 @@ gem "friendly_id"
 gem "bcrypt"
 gem "turbolinks"
 gem 'cancancan', '~> 2.0'
+gem 'pundit'
