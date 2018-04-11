@@ -11,9 +11,12 @@
 <%= f.text_field :quantity %> <br><br>
 <%= f.label :description %>
 <%= f.text_area :description %> <br><br>
+<%= f.hidden_field :user_id, value: current_user.id%>
 <% if !params[:category_id]%>
 <%= f.label :category %>
 <%= f.collection_select(:category_id, Category.all, :id, :name)%><br><br>
-<%end%> 
+<%else%>
+<%= f.hidden_field :category_id, value: params[:category_id]%>
+<%end%>
 <%= f.submit "Add Supply"%>
 <%end%>
