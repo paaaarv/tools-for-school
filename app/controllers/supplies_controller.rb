@@ -3,8 +3,10 @@ class SuppliesController < ApplicationController
 
 
   def new
-    if current_user.admin?
-      @supply = Supply.new
+    if current_user
+      if current_user.admin?
+        @supply = Supply.new
+      end
     else
       redirect_to '/'
     end
@@ -16,7 +18,8 @@ class SuppliesController < ApplicationController
   end
 
   def update
-    @supply.find(params[:id])
+    @supply = Supply.find(params[:id])
+    authorize @supply
     @supply.update(supply_params)
     redirect_to '/'
   end
