@@ -5,10 +5,10 @@
 
 <% @categories.each do |category|%>
 <% if category.supplies.length >= 1 %>
-  <h4> <%= category.name %> </h4>
+  <h3> <%= category.name %> </h3>
     <% see_two(category).each do |supply|%>
       <p> <%= "#{supply.name} | $#{supply.price} | #{amount_to_goal(supply)}"%> </p>
     <%end%>
-    <%= link_to "See More", category_path(category)%><br>
+    <p><%= link_to "See More", category_path(category)%></p><br>
   <%end%>
 <%end%>
