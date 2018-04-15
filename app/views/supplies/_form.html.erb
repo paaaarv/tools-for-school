@@ -1,4 +1,4 @@
-<%= form_for @supply do |f| %>
+<%= form_for @supply do |f|%> 
 <%= f.label :name %>
 <%= f.text_field :name%> <br><br>
 <%= f.label :price%>
@@ -8,3 +8,11 @@
 <%= f.label :description %>
 <%= f.text_area :description %> <br><br>
 <%= f.hidden_field :user_id, value: current_user.id%>
+<% if !params[:category_id]%>
+<%= f.label :category %>
+<%= f.collection_select(:category_id, Category.all, :id, :name)%><br><br>
+<%else%>
+<%= f.hidden_field :category_id, value: params[:category_id]%>
+<%end%>
+<%= f.submit%>
+<%end%>

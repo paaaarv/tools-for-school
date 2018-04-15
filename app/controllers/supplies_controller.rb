@@ -1,15 +1,10 @@
 require 'pry'
 class SuppliesController < ApplicationController
-
+  before_action :logged_in?
 
   def new
-    if current_user
-      if current_user.admin?
-        @supply = Supply.new
-      end
-    else
-      redirect_to '/'
-    end
+    @supply = Supply.new
+    authorize @supply
   end
 
   def create

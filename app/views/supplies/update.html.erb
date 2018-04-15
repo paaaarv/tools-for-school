@@ -1,7 +1,3 @@
-<h1> Update <%= @supply.name%> </h1> 
-
+<h1> Update <%= @supply.name%> </h1>
 
 <%= render 'form' %>
-<%= f.collection_select(:category_id, Category.all, :id, :name)%><br><br>
-<%= f.submit "Update Supply"%>
-<%end%>

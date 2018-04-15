@@ -1,13 +1,5 @@
 
 <h1> Need a New Supply? </h1>
 
-<%= render 'form'%>
 
-<% if !params[:category_id]%>
-<%= f.label :category %>
-<%= f.collection_select(:category_id, Category.all, :id, :name)%><br><br>
-<%else%>
-<%= f.hidden_field :category_id, value: params[:category_id]%>
-<%end%>
-<%= f.submit "Add Supply"%>
-<%end%>
+<%= render 'form'%>
