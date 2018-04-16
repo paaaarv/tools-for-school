@@ -8,8 +8,12 @@ class SuppliesController < ApplicationController
   end
 
   def create
-    @supply = Supply.create(supply_params)
-    redirect_to '/'
+    @supply = Supply.new(supply_params)
+    if @supply.save
+      redirect_to '/'
+    else
+      render :new
+    end
   end
 
   def update

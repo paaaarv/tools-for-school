@@ -10,9 +10,6 @@
   <ul>
     <li> <%= link_to "Home", categories_path%> </li>
     <% if current_user%>
-      <%if current_user.admin?%>
-        <li> <%= link_to "Add a Supply", new_supply_path%> </li>
-      <%end%>
       <li> Signed in as <%=current_user.email%> </li>
       <li> <%=link_to "Sign Out", destroy_user_session_path%> </li>
     <%else%>

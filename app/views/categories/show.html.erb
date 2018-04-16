@@ -13,7 +13,6 @@
   <%end%>
 <%end%>
 
-
 <%if current_user.admin?%>
-  <h3> <%= link_to "Add a new supply", new_supply_path%> </h3>
+  <h3> <%= link_to "Add a new supply", new_category_supply_path(@category.id)%> </h3>
 <%end%>
