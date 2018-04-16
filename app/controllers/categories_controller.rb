@@ -1,11 +1,14 @@
 class CategoriesController < ApplicationController
 
-
   def home
     @categories = Category.all
   end
 
   def show
-    @category = Category.find(params[:id])
+    if current_user
+      @category = Category.find(params[:id])
+    else
+      redirect_to new_user_session_path
+    end
   end
 end
