@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   root 'categories#home'
 
   resources :categories do
-    resources :supplies, only: [:new, :show] do
+    resources :supplies do
       put '/donate' => "supply#donate"
     end
   end
-  resources :supplies
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

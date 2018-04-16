@@ -13,7 +13,7 @@ Specs:
 - [ ] Include logout (Devise)
 - [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
 - [x] Include nested resource show or index (URL categories/:id/supplies)
-- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
+- [x] Include nested resource "new" form (can only make new supply/edit supply through categories)
 - [ ] Include form display of validation errors (form URL e.g. /recipes/new)
 
 Confirm:
