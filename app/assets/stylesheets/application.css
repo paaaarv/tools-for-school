@@ -41,12 +41,14 @@
  }
 
  h1 {
-   text-align: center;
    text-size: 50px;
 
  }
 
-h3, p {
-  text-align: center;
+.error_explanation {
+  color: red;
+  background-color: white;
+  
+
 
 }
