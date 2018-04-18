@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories do
     resources :supplies do
       put '/donate' => "supply#donate"
+      delete '/categories/:id/supplies/:id/delete' => "supply#destroy"
     end
   end
   devise_for :users

@@ -34,6 +34,11 @@ class SuppliesController < ApplicationController
     redirect_to '/'
   end
 
+  def destroy
+    Supply.find(params[:id]).destroy
+    redirect_to '/'  
+  end
+
   private
 
   def supply_params
