@@ -32,3 +32,6 @@ gem "bcrypt"
 gem "turbolinks"
 gem 'cancancan', '~> 2.0'
 gem 'pundit'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
