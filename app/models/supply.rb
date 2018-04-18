@@ -4,8 +4,10 @@ class Supply < ActiveRecord::Base
 
   validates :name, presence: true
   validates :price, presence: true
+  validates :price, numericality: true
+  validates :quantity, numericality: true 
   validates :quantity, presence: true
-  validates :category_id, presence: true 
+  validates :category_id, presence: true
 
 
 

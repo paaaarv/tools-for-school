@@ -20,7 +20,9 @@
 
 
  }
-
+.field_with_errors {
+  display: inline;
+}
  .header {
      list-style-type: none;
      margin: 0;
