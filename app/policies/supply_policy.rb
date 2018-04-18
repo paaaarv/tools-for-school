@@ -4,7 +4,7 @@ class SupplyPolicy< ApplicationPolicy
   def new?
     user.admin?
   end
-  def update?
+  def edit?
     record.try(:user) == user
   end
 

@@ -18,6 +18,7 @@ class SuppliesController < ApplicationController
 
   def edit
     @supply = Supply.find(params[:id])
+    authorize @supply
   end
   def update
     @supply = Supply.find(params[:id])
@@ -27,7 +28,7 @@ class SuppliesController < ApplicationController
   end
 
   def donate
-    @supply = Supply.find(params[:id])
+    @supply = Supply.find(params[:supply_id])
     donations = params[:supply][:donations].to_f
     @supply.donations += donations
     @supply.save
@@ -36,7 +37,7 @@ class SuppliesController < ApplicationController
 
   def destroy
     Supply.find(params[:id]).destroy
-    redirect_to '/'  
+    redirect_to '/'
   end
 
   private
