@@ -13,9 +13,15 @@
  *= require_tree .
  *= require_self
  */
+ #error_explanation {
+   color: red;
+   background-color: white;
 
 
- ul {
+
+ }
+
+ .header {
      list-style-type: none;
      margin: 0;
      padding: 0;
@@ -25,7 +31,7 @@
 
 
 
- li {
+ .header-list{
      float: left;
      color: white;
      text-align: center;
@@ -44,11 +50,3 @@
    text-size: 50px;
 
  }
-
-.error_explanation {
-  color: red;
-  background-color: white;
-  
-
-
-}

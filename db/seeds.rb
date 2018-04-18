@@ -15,5 +15,5 @@
 @s3 = Supply.find_or_create_by(name: "Binders", price: "4.99", quantity: 11, description: "Need binders to organize classroom", category_id: 3)
 
 
-@user = User.new(email: "parv@gmail.com", password: "parvathi")
-@admin = User.new(email: "pkumar@trinity.edu", password: "password")
+@user = User.create(email: "parv@gmail.com", password: "parvathi")
+@admin = User.create(email: "pkumar@trinity.edu", password: "password")
