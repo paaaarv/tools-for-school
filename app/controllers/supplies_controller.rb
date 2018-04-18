@@ -16,6 +16,9 @@ class SuppliesController < ApplicationController
     end
   end
 
+  def edit
+    @supply = Supply.find(params[:id])
+  end
   def update
     @supply = Supply.find(params[:id])
     authorize @supply
