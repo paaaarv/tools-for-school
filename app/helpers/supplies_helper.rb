@@ -1,9 +1,9 @@
 module SuppliesHelper
 
 
-  def amount_to_goal(supply)
+  def goal(supply)
     goal = supply.price * supply.quantity
-    "#{number_to_currency(supply.donations)} out of #{number_to_currency(goal)} raised."
+    goal
   end
 end
 
