@@ -3,6 +3,6 @@
 <%= render partial:'errors'%>
 <br>
 <br>
-<%= form_for @supply, url: category_supply_path(@category, @supply) do |f|%>
+<%= form_for @supply, url: category_supply_path(@category.id, @supply.id) do |f|%>
   <%= render partial: 'form', locals: {f: f} %>
 <%end%>

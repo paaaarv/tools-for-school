@@ -4,6 +4,6 @@
 <%= render partial:'errors'%>
 <br>
 <br>
-<%= form_for @supply do |f|%>
-<%= render partial:'form', locals: {f : f} %>
+<%= form_for @supply, url: category_supplies_path(@category.id) do |f|%>
+<%= render partial: 'form', locals: {f: f} %>
 <%end%>

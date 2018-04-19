@@ -3,11 +3,13 @@ class SuppliesController < ApplicationController
   before_action :logged_in?
 
   def new
+    @category = Category.find(params[:category_id])
     @supply = Supply.new
     authorize @supply
   end
 
   def create
+    @category = Category.find(params[:category_id])
     @supply = Supply.new(supply_params)
     if @supply.save
       redirect_to '/'
@@ -25,9 +27,11 @@ class SuppliesController < ApplicationController
   def update
     @supply = Supply.find(params[:id])
     authorize @supply
-    binding.pry
-    @supply.update(supply_params)
-    redirect_to '/'
+    if @supply.update(supply_params)
+      redirect_to '/'
+    else
+      redirect_to edit_category_supply_path(params[:category_id], @supply.id)
+    end
   end
 
   def donate
