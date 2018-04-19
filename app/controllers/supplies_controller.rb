@@ -17,12 +17,15 @@ class SuppliesController < ApplicationController
   end
 
   def edit
+    @category = Category.find(params[:category_id])
     @supply = Supply.find(params[:id])
     authorize @supply
   end
+
   def update
     @supply = Supply.find(params[:id])
     authorize @supply
+    binding.pry
     @supply.update(supply_params)
     redirect_to '/'
   end

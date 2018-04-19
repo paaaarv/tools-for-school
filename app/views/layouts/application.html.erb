@@ -8,7 +8,7 @@
 </head>
 <body>
   <ul class = "header">
-    <li class = "header-list"> <%= link_to "Home", categories_path%> </li>
+    <li class = "header-list"> <%= link_to "Home", root_path%> </li>
     <% if current_user%>
       <li class = "header-list"> Signed in as <%=current_user.email%> </li>
       <li class = "header-list"> <%=link_to "Sign Out", destroy_user_session_path%> </li>

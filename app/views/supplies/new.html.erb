@@ -1,5 +1,9 @@
 
 <h1> Need a New Supply? </h1>
 
-
-<%= render 'form'%>
+<%= render partial:'errors'%>
+<br>
+<br>
+<%= form_for @supply do |f|%>
+<%= render partial:'form', locals: {f : f} %>
+<%end%>

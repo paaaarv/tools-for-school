@@ -13,7 +13,7 @@
     <%end%>
 
 
-<%= form_for @supply, url: category_supplies_path(params[:category_id]) do |f|%>
+
 <p><%= f.label :name %>
 <%= f.text_field :name%> <br><br>
 <%= f.label :price%>
@@ -25,4 +25,3 @@
 <%= f.hidden_field :user_id, value: current_user.id%>
 <%= f.hidden_field :category_id, value: params[:category_id]%>
 <%= f.submit%></p>
-<%end%>

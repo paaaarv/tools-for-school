@@ -1,0 +1,13 @@
+
+<% if @supply.errors.any?%>
+  <div id = "error_explanation">
+    <h3> <%= pluralize(@supply.errors.count, "error")%>
+      prohibited this supply from being saved. Please try again.</h2>
+
+      <ul>
+      <% @supply.errors.full_messages.each do |error|%>
+        <li><%= error %> </li> <br>
+      <%end%>
+      <ul>
+      </div>
+    <%end%>

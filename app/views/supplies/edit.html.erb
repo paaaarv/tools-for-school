@@ -1,3 +1,8 @@
 <h1> Update <%= @supply.name%> </h1>
 
-<%= render 'form' %>
+<%= render partial:'errors'%>
+<br>
+<br>
+<%= form_for @supply, url: category_supply_path(@category, @supply) do |f|%>
+  <%= render partial: 'form', locals: {f: f} %>
+<%end%>
