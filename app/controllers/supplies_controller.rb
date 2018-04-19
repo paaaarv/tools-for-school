@@ -25,12 +25,13 @@ class SuppliesController < ApplicationController
   end
 
   def update
+    @category = Category.find(params[:category_id])
     @supply = Supply.find(params[:id])
     authorize @supply
     if @supply.update(supply_params)
       redirect_to '/'
     else
-      redirect_to edit_category_supply_path(params[:category_id], @supply.id)
+      render :edit
     end
   end
 
