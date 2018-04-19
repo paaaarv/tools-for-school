@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  root 'categories#home'
+  root 'categories#index'
 
-  resources :categories do
-    resources :supplies do
+  resources :categories, only: [:show] do
+    resources :supplies, only: [:new, :create, :edit, :update] do
       patch '/donate' => "supplies#donate"
-      delete '/categories/:id/supplies/:id/delete' => "supply#destroy"
+      delete '/delete' => "supply#destroy"
     end
   end
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
