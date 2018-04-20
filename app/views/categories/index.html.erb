@@ -7,7 +7,7 @@
 <% if category.supplies.length >= 1 %>
   <h3> <%= category.name %> </h3>
     <% see_two(Supply.most_donations(category)).each do |supply|%>
-      <p> <%= "#{supply.name} | $#{supply.price} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised."%> </p>
+      <p> <%= "#{supply.name} | #{number_to_currency(supply.price)} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised."%> </p>
     <%end%>
     <p><%= link_to "See More", category_path(category)%></p><br>
   <%end%>
