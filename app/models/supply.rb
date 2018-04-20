@@ -12,7 +12,17 @@ class Supply < ActiveRecord::Base
 
   def self.most_donations(category)
     @supplies=Supply.where(category_id: category.id)
-    @supplies.order(donations: :desc)
+    @supplies.sort{|a,b| a.amount_to_goal <=> b.amount_to_goal}
+  end
+
+
+  def goal
+    goal = self.price * self.quantity
+    goal
+  end
+
+  def amount_to_goal
+    goal/self.donations
   end
 
 end

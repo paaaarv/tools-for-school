@@ -1,12 +1,12 @@
 module CategoriesHelper
 
 
-  def see_two(category)
+  def see_two(supplies)
     array = []
-    array << category.supplies.first
-    if category.supplies.length > 1
-      array << category.supplies.second
+    array << supplies.first
+    if supplies.length > 1
+      array << supplies.second
     end
     array
-  end 
+  end
 end
