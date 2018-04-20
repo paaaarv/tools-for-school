@@ -11,7 +11,7 @@
     <li class = "header-list"> <%= link_to "Home", root_path%> </li>
     <% if current_user%>
       <li class = "header-list"> Signed in as <%=current_user.email%> </li>
-      <li class = "header-list"> <%=link_to "Sign Out", destroy_user_session_path%> </li>
+      <li class = "header-list"> <%=link_to "Sign Out", users_signout_path%> </li>
     <%else%>
       <li class = "header-list"><%= link_to "Sign Up", new_user_registration_path%></li>
       <li class = "header-list"> <%= link_to "Sign In", new_user_session_path%></li>
