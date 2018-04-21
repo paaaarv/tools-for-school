@@ -44,7 +44,7 @@ class SuppliesController < ApplicationController
   end
 
   def destroy
-    Supply.find(params[:id]).destroy
+    Supply.find(params[:supply_id]).destroy
     redirect_to '/'
   end
 

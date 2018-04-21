@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:show] do
     resources :supplies, only: [:new, :create, :edit, :update] do
       patch '/donate' => "supplies#donate"
-      delete '/delete' => "supply#destroy"
+      delete '' => "supplies#destroy"
     end
   end
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
