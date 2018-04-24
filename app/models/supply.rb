@@ -15,6 +15,13 @@ class Supply < ActiveRecord::Base
     @supplies.sort{|a,b| a.amount_to_goal <=> b.amount_to_goal}
   end
 
+  def valid_donation?
+    if self.donations > self.goal
+      errors.add(:donations, "cannot donate more than amount needed.")
+      return false
+    end
+  end
+
 
   def goal
     goal = self.price * self.quantity

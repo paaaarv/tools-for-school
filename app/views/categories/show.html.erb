@@ -2,13 +2,15 @@
 
 <br>
 
+
+<br>
+
 <% Supply.most_donations(@category).each do |supply|%>
 <h3> <%= "#{supply.name} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised." %> </h3>
 <p> Price: <%= supply.price%> </p>
 <p> Quantity: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
 <%= edit_supply(@category, supply)%>
-<%= delete_supply(@category,supply)%>
 <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
   <p><%= f.text_field :donations%>
   <%=f.submit "Donate now!"%></p>

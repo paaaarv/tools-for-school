@@ -39,8 +39,13 @@ class SuppliesController < ApplicationController
     @supply = Supply.find(params[:supply_id])
     donations = params[:supply][:donations].to_f
     @supply.donations += donations
-    @supply.save
-    redirect_to '/'
+    if @supply.valid_donation?
+      @supply.save
+      redirect_to '/'
+
+    else
+      redirect_to category_path(@supply.category.id)
+    end
   end
 
   def destroy
