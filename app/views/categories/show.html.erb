@@ -15,9 +15,10 @@
 <p> Price: <%= number_to_currency(supply.price)%> </p>
 <p> Quantity: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
-
-  <%= link_to "Edit", edit_category_supply_path(@category, supply)%>
-  <%= link_to "Delete", category_supply_destroy_path(@category, supply), method: :delete, data: { confirm: "Are you sure?" }%> 
+  <% if current_user.id == supply.user_id%>
+    <%= link_to "Edit", edit_category_supply_path(@category, supply)%>
+    <%= link_to "Delete", category_supply_destroy_path(@category, supply), method: :delete, data: { confirm: "Are you sure?" }%>
+  <%end%>
 
 <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
   <p><%= f.text_field :donations%>
