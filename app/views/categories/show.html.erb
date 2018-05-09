@@ -15,10 +15,9 @@
     <%= link_to "Delete", category_supply_destroy_path(@category, supply), method: :delete, data: { confirm: "Are you sure?" }%>
   <%end%>
 
-<%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
-  <p><%= f.text_field :donations, value: "0"%>
-  <%=f.submit "Donate now!"%></p>
-  <%end%>
+
+  <%= render partial: 'supplies/donate', locals: {supply:supply}%>
+
 <%end%>
 
 <%if current_user.admin?%>
