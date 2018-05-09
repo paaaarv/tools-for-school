@@ -1,16 +1,24 @@
-<h1> <%= @category.name%> </h1>
+<%require 'pry'%>
 
+<h1> <%= @category.name%> </h1>
 <br>
 
 
+  <% @category.supplies.each do |supply|%>
+    <% @supply = supply%>
+    <%= render partial: 'supplies/errors'%>
+  <%end%>
 <br>
 
 <% Supply.most_donations(@category).each do |supply|%>
 <h3> <%= "#{supply.name} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised." %> </h3>
-<p> Price: <%= supply.price%> </p>
+<p> Price: <%= number_to_currency(supply.price)%> </p>
 <p> Quantity: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
-<%= edit_supply(@category, supply)%>
+
+  <%= link_to "Edit", edit_category_supply_path(@category, supply)%>
+  <%= link_to "Delete", category_supply_destroy_path(@category, supply), method: :delete, data: { confirm: "Are you sure?" }%> 
+
 <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
   <p><%= f.text_field :donations%>
   <%=f.submit "Donate now!"%></p>

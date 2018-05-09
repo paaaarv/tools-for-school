@@ -10,6 +10,7 @@ class Supply < ActiveRecord::Base
   validates :quantity, presence: true
   validates :category_id, presence: true
 
+
   def self.most_donations(category)
     @supplies=Supply.where(category_id: category.id)
     @supplies.sort{|a,b| a.amount_to_goal <=> b.amount_to_goal}
