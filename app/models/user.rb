@@ -1,10 +1,12 @@
+require 'pry'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   enum role: [:normal, :admin]
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable,
+         :omniauthable, :omniauth_providers => [:google_oauth2]
 
   has_many :supplies
   has_many :categories, through: :supplies
@@ -27,5 +29,5 @@ class User < ActiveRecord::Base
    end
  end
 
- 
+
 end

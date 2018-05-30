@@ -33,5 +33,5 @@ gem "turbolinks"
 gem 'cancancan', '~> 2.0'
 gem 'pundit'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'dotenv-rails'
