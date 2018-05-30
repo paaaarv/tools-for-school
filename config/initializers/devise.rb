@@ -285,4 +285,5 @@ Devise.setup do |config|
       scope: "email"
     }
   end
+
 end
