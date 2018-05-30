@@ -20,6 +20,8 @@ class Supply < ActiveRecord::Base
     if self.donations > self.goal
       errors.add(:donations, "cannot be more than amount needed.")
       return false
+    else
+      return true
     end
   end
 

@@ -43,8 +43,8 @@ class SuppliesController < ApplicationController
     @supply = Supply.find(params[:supply_id])
     @category = @supply.category
     donations = params[:supply][:donations].to_f
+    @supply.donations += donations
     if @supply.valid_donation?
-      @supply.donations += donations
       @supply.save
     end
       render :show

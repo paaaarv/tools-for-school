@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ @import url('https://fonts.googleapis.com/css?family=Abel');
+ @import url('https://fonts.googleapis.com/css?family=Rajdhani');
+
  #error_explanation {
    color: red;
    background-color: white;
@@ -31,6 +35,9 @@
      background-color: #333;
  }
 
+body {
+  background-color: #ebfaeb;
+}
 
 
  .header-list{
