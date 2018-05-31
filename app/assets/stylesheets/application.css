@@ -14,8 +14,9 @@
  *= require_self
  */
 
- @import url('https://fonts.googleapis.com/css?family=Abel');
- @import url('https://fonts.googleapis.com/css?family=Rajdhani');
+ @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Homemade+Apple');
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt');
 
  #error_explanation {
    color: red;
@@ -32,19 +33,19 @@
      margin: 0;
      padding: 0;
      overflow: hidden;
-     background-color: #333;
+     background-color: #004d4d;
+     border-radius: 15px;
  }
 
-body {
-  background-color: #ebfaeb;
-}
+
 
 
  .header-list{
      float: left;
      color: white;
      text-align: center;
-     text-size: 30px;
+     font-family: 'IBM Plex Sans Condensed', sans-serif;
+     font-size: 15px;
      padding: 15px 20px;
      margin-left: 20px;
      text-decoration: none;
@@ -56,6 +57,10 @@ body {
  }
 
  h1 {
-   text-size: 50px;
+   margin-top: 40px;
+   text-align: center;
+   font-family: "Rock Salt", cursive;
+   font-size: 60px;
+   color: 	 #004d99;
 
  }

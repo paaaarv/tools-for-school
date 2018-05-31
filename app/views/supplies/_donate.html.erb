@@ -1,6 +1,5 @@
 
 
-  <h3><%= "Donate towards #{supply.name}:"%></h3>
 <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
   <p><%= f.text_field :donations, value: "0"%>
   <%=f.submit "Donate now!"%></p>
