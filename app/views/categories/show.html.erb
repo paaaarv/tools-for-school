@@ -3,10 +3,8 @@
 <h1> <%= @category.name%> </h1>
 <br>
 
-<br>
-
 <% Supply.most_donations(@category).each do |supply|%>
-<h4> <%= "#{supply.name} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised." %> </h4> <br>
+<h4> <bold><%="#{supply.name} | #{number_to_currency(supply.donations)} out of #{number_to_currency(supply.goal)} raised." %></bold> </h4> <br>
 <p> Price per Item: <%= number_to_currency(supply.price)%> </p>
 <p> Quantity needed: <%= supply.quantity %> </p>
 <p> Description: <%= supply.description%> </p>
@@ -21,5 +19,5 @@
 <%end%>
 
 <%if current_user.admin?%>
-  <h3> <%= link_to "Add a new supply", new_category_supply_path(@category.id)%> </h3>
+  <h4> <%= link_to "Add a new supply", new_category_supply_path(@category.id)%> </h4>
 <%end%>

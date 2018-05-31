@@ -1,5 +1,5 @@
 class AddDonationsToSupplies < ActiveRecord::Migration
   def change
-    add_column :supplies, :donations, :integer, default: 0
+    add_column :supplies, :donations, :float, default: 0
   end
 end

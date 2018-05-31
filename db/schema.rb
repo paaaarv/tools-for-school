@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20180418215602) do
     t.float    "price"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "description"
-    t.integer  "donations",   default: 0
+    t.float    "donations",   default: 0.0
   end
 
   create_table "users", force: :cascade do |t|
