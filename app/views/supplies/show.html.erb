@@ -1,7 +1,7 @@
 <%if @supply.errors.any?%>
   <%=render partial: 'errors'%>
 
-  <h3> If you'd like to try donating again: </h3>
+  <h2> If you'd like to try donating again: </h2>
   <br>
   <%= render partial: 'donate', locals:{supply:@supply}%>
   <%else%>
