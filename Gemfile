@@ -24,9 +24,6 @@ group :test, :development do
   gem "guard-rspec", require: false
   gem "thin"
 end
-group :production do
-  gem 'pg'
-end
 
 gem "bootstrap-sass", "~> 3.1.1"
 gem "faker"
