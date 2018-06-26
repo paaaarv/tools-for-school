@@ -8,12 +8,14 @@ Rails.application.routes.draw do
       delete '/destroy' => "supplies#destroy"
     end
   end
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  get '/users/my_profile' => 'users#show'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
 
 
 
   devise_scope :user do
    get '/users/signout' => 'users/sessions#destroy'
+
  end
 
 

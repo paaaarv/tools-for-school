@@ -18,9 +18,10 @@
 @import url('https://fonts.googleapis.com/css?family=Homemade+Apple');
 @import url('https://fonts.googleapis.com/css?family=Rock+Salt');
 
- #error_explanation {
+ .error_explanation {
    color: red;
    background-color: white;
+   font-family:
 
 
 

@@ -1,4 +1,12 @@
+
+
 <h2>Sign up</h2>
+<% if params[:user] %>
+<%if params[:user][:email].empty? || params[:user][:password].empty? || params[:user][:password_confirmation].empty?%>
+  <h4 class = "error_explanation"><%="One or more fields is empty. Please fill out all fields."%></h4>
+<%end%>
+<%end%>
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
