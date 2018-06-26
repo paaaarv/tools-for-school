@@ -19,7 +19,7 @@ group :test, :development do
   gem "factory_girl_rails"
   gem "simplecov"
   gem "database_cleaner"
-  gem "sqlite3"
+  gem "pg", '~> 0.18'
   gem "pry"
   gem "guard-rspec", require: false
   gem "thin"
