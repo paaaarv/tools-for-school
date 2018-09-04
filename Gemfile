@@ -24,7 +24,7 @@ group :test, :development do
   gem "guard-rspec", require: false
   gem "thin"
 end
-
+gem 'active_model_serializers'
 gem "bootstrap-sass", "~> 3.1.1"
 gem "faker"
 gem "friendly_id"
