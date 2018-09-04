@@ -13,4 +13,12 @@ class CategoriesController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
+  def supplies_data
+    @category = Category.find(params[:id])
+    @supplies = @category.supplies
+    render json: @supplies
+
+  end
+
 end
