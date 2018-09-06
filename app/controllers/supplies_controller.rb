@@ -8,6 +8,12 @@ class SuppliesController < ApplicationController
     authorize @supply
   end
 
+  def data
+    @category = Category.find(params[:category_id])
+    @supply = Supply.find(params[:id])
+    render json: @supply
+  end
+
   def create
     @category = Category.find(params[:category_id])
     @supply = Supply.new(supply_params)

@@ -10,11 +10,6 @@
 
 <%end%>
 
-  <h1> <%=@supply.name%> || <%= number_to_currency(@supply.donations)%> out of <%= number_to_currency(@supply.goal)%> donated! </h1>
-  <h3> Price: <%= number_to_currency(@supply.price)%></h3> <br>
-  <p> Quantity needed: <%= @supply.quantity%> </p> <br>
-  <p> Description: <%= @supply.description%> </p> <br>
-
 
 <h3> <%=link_to "Click here to go back to #{@supply.category.name}", category_path(@supply.category)%></h3>
 

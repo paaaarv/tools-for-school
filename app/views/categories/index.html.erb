@@ -22,11 +22,21 @@ $(function(){
       var supplies = data ;
       var list = document.getElementById("category-supplies-" + id)
       supplies.forEach(function(supply){
-        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' <br> <div id="supply-div" data-supplyId="'+ supply.id +'"></div></p><button id="seeSupply" data-categoryId="' + id +'" data-id="' + supply.id +'">More</button><br>'
+        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' <br> <div id="supply-div" data-supplyId="'+ supply.id +'"></div></p><button id="seeSupply" data-categoryId="' + id +'" data-supplyid="' + supply.id +'">More</button><br>'
       });
 
     });
   });
+    $("#seeSupply").on("click", function(){
+      
+      var supplyId = $(this).data("id");
+      var categoryId = $(this).data("categoryid");
+      $.get("/categories/" + categoryId + "/supplies/" + supplyId + "/data", function(data){
+        var supplylist= document.getElementById("supply-div")
+        supplylist.innerHTML += data
+      })
+    })
+
 
 })
 </script>
