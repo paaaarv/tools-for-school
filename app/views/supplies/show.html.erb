@@ -6,10 +6,14 @@
   <%= render partial: 'donate', locals:{supply:@supply}%>
   <%else%>
 
-    <h2> Thank you for donating towards: <bold> <%= @supply.name%> </bold>  </h2>
+    <%#<h2> Thank you for donating towards: <bold> <%= @supply.name </bold>  </h2> %>
 
 <%end%>
 
+  <h1> <%=@supply.name%> || <%= number_to_currency(@supply.donations)%> out of <%= number_to_currency(@supply.goal)%> donated! </h1><br>
+  <h3> Price: <%= number_to_currency(@supply.price)%></h3> <br>
+  <p> Quantity needed: <%= @supply.quantity%> </p> <br>
+  <p> Description: <%= @supply.description%> </p> <br>
 
 
 <%=link_to "Click here to go back to #{@supply.category.name}", category_path(@supply.category)%>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'categories#index'
 
   resources :categories, only: [:show] do
-    resources :supplies, only: [:new, :create, :edit, :update] do
+    resources :supplies, only: [:new, :create, :edit,:show, :update] do
       patch '/donate' => "supplies#donate"
       delete '/destroy' => "supplies#destroy"
     end
