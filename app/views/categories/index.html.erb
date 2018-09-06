@@ -22,7 +22,7 @@ $(function(){
       var supplies = data ;
       var list = document.getElementById("category-supplies-" + id)
       supplies.forEach(function(supply){
-        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' | </p><br>'
+        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' | </p><button id="seeSupply" data-categoryId="' + id +'" data-id="' + supply.id +'">More</button><br>'
       });
 
     });
