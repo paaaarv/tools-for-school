@@ -3,11 +3,12 @@
 
 
 <% @categories.each do |category|%>
-<h3> <%= category.name %> </h3>
+<h3> <%= category.name %></h3>
+
 <div id="category-supplies-<%=category.id%>">
 </div>
 <button id = "seeMore" class="js-more" data-id="<%=category.id%>">See <%= category.name%></button>
-<button> <a href="<%=category_path(category)%>"</a>Donate towards <%= category.name%> </button> 
+
 
 <%end%>
 
@@ -20,9 +21,8 @@ $(function(){
     $.get("/categories/" + id + "/supplies_data", function(data) {
       var supplies = data ;
       var list = document.getElementById("category-supplies-" + id)
-      list.innerHTML ="<ul>"
       supplies.forEach(function(supply){
-        list.innerHTML+='<li>' + supply.name + ' | ' + supply.price + '| </li><br>'
+        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' | </p><br>'
       });
 
     });
