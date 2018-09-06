@@ -9,6 +9,9 @@
 <body>
   <ul class = "header">
     <li class = "header-list"> <%= link_to "Tools For School Home", root_path%> </li>
+    <%if @category && current_user.admin?%>
+      <li class="header-list"> <%=link_to "Add Supply", new_category_supply_path(@category.id)%></li>
+    <%end%>
     <% if current_user%>
       <li class = "header-list"> Signed in as <%=current_user.email%> </li>
       <li class = "header-list"> <%=link_to "Sign Out", users_signout_path%> </li>

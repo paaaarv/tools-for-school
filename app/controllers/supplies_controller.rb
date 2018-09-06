@@ -11,7 +11,7 @@ class SuppliesController < ApplicationController
   def data
     @category = Category.find(params[:category_id])
     @supply = Supply.find(params[:id])
-    render json: @supply
+    render json: @supplies
   end
 
   def create
