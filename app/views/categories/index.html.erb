@@ -7,7 +7,7 @@
 
 <div id="category-supplies-<%=category.id%>">
 </div>
-<button id = "seeMore" class="js-more" data-id="<%=category.id%>">See <%= category.name%></button>
+<button class="js-more" data-id="<%=category.id%>">See <%= category.name%></button>
 
 
 <%end%>
@@ -23,11 +23,12 @@ $(function(){
       var list = document.getElementById("category-supplies-" + id)
       list.innerHTML = ""
       supplies.forEach(function(supply){
-        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + ' <br></p><br>'
+        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + '<button class="more-supply" data-id="'+ supply.id+'">See More On ' + supply.name + ' </button> <br></p><br>'
       });
-
     });
   });
+  $(document).on('click','.more-supply',function() {
 
+  });
 })
 </script>
