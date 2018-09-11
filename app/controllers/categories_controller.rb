@@ -13,6 +13,7 @@ class CategoriesController < ApplicationController
     else
       redirect_to new_user_session_path
     end
+    render json: @category
   end
 
   def supplies_data

@@ -14,7 +14,7 @@
     <%end%>
   </div>
 
-  <button class="next-supply">NEXT </button>
+  <button class="next-supply" data-id="<%=@category.id%>">NEXT </button>
 
 
 
@@ -30,6 +30,12 @@
 
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
+    $(".next-supply").on("click", function(){
+      var id = $(this).data("id")
+      $.get("/categories/" + id + "/supplies_data", function(data){
+        console.log(data)
+      })
+    })
 
   })
 </script>
