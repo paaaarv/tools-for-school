@@ -1,7 +1,7 @@
 
 
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
-<button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
+<button class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
 <br>
 
   <div class="supply-info">
@@ -34,6 +34,15 @@
       var categoryId = parseInt($(".next-category").attr("data-id")) + 1;
       $.get("/categories/" + categoryId + ".json", function(data){
         $(".category-name").text(data["name"])
+        $(".next-category").attr("data-id", data["id"])
+        $(".prev-category").attr("data-id", data["id"])
+      })
+    })
+    $(".prev-category").on("click", function(){
+      var prevId = parseInt($(".prev-category").attr('data-id')) -1;
+      $.get("/categories/" + prevId + ".json", function(data){
+        $(".category-name").text(data["name"]);
+        $(".prev-category").attr("data-id", data["id"])
         $(".next-category").attr("data-id", data["id"])
       })
     })
