@@ -1,6 +1,7 @@
-<%require 'pry'%>
 
-<h1> <%= @category.name%> </h1>
+
+<h1 class="category-name"> <%= @category.name%> </h1> <br>
+<button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
 <br>
 
   <div class="supply-info">
@@ -14,7 +15,6 @@
     <%end%>
   </div>
 
-  <button class="next-supply" data-id="<%=@category.id%>">NEXT </button>
 
 
 
@@ -30,10 +30,10 @@
 
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
-    $(".next-supply").on("click", function(){
-      var id = $(this).data("id")
-      $.get("/categories/" + id, function(data){
-        console.log(data)
+    $(".next-category").on("click", function(){
+      var categoryId = $(this).data("id") + 1
+      $.get("/categories/" + categoryId + ".json", function(data){
+        $(".category-name").text(data["name"])
       })
     })
 

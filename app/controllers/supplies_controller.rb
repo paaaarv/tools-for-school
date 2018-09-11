@@ -43,7 +43,10 @@ class SuppliesController < ApplicationController
 
   def show
     @supply = Supply.find(params[:id])
-    render json: @supply
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @supply}
+    end
   end
 
   def donate
