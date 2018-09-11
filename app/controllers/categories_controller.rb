@@ -13,7 +13,10 @@ class CategoriesController < ApplicationController
     else
       redirect_to new_user_session_path
     end
-    render json: @category
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @category}
+    end
   end
 
   def supplies_data

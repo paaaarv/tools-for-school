@@ -18,8 +18,8 @@
 $(function(){
   $(".js-more").on("click", function(){
     var id= $(this).data("id");
-    $.get("/categories/" + id + "/supplies_data", function(data) {
-      var supplies = data ;
+    $.get("/categories/" + id + ".json", function(data) {
+      var supplies = data.supplies ;
       var list = document.getElementById("category-supplies-" + id)
       list.innerHTML = ""
       supplies.forEach(function(supply){

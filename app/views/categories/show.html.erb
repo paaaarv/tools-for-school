@@ -4,10 +4,10 @@
 <br>
 
   <div class="supply-info">
-  <h4> <bold><%="#{@supply.name} | #{number_to_currency(@supply.donations)} out of #{number_to_currency(@supply.goal)} raised." %></bold> </h4> <br>
-  <p> Price per Item: <%= number_to_currency(@supply.price)%> </p>
-  <p> Quantity needed: <%= @supply.quantity %> </p>
-  <p> Description: <%= @supply.description%> </p>
+  <h4 class="supply-heading"> <bold><%="#{@supply.name} | #{number_to_currency(@supply.donations)} out of #{number_to_currency(@supply.goal)} raised." %></bold> </h4> <br>
+  <p class="supply-price"> Price per Item: <%= number_to_currency(@supply.price)%> </p>
+  <p class="supply-quantity"> Quantity needed: <%= @supply.quantity %> </p>
+  <p class="supply-description"> Description: <%= @supply.description%> </p>
     <% if current_user.id == @supply.user_id%>
       <p><%= link_to "Edit", edit_category_supply_path(@category, @supply)%></p>
       <p><%= link_to "Delete", category_supply_destroy_path(@category, @supply), method: :delete, data: { confirm: "Are you sure?" }%></p>
@@ -32,7 +32,7 @@
   $(function(){
     $(".next-supply").on("click", function(){
       var id = $(this).data("id")
-      $.get("/categories/" + id + "/supplies_data", function(data){
+      $.get("/categories/" + id, function(data){
         console.log(data)
       })
     })

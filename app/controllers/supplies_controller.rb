@@ -43,6 +43,7 @@ class SuppliesController < ApplicationController
 
   def show
     @supply = Supply.find(params[:id])
+    render json: @supply
   end
 
   def donate

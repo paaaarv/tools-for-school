@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     end
   end
   get '/users/my_profile' => 'users#show'
-  get '/categories/:id/supplies_data' => "categories#supplies_data"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
 
 
