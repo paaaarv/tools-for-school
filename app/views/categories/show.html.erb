@@ -31,11 +31,11 @@
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
     $(".next-category").on("click", function(){
-      var categoryId = $(this).data("id") + 1
+      var categoryId = parseInt($(".next-category").attr("data-id")) + 1;
       $.get("/categories/" + categoryId + ".json", function(data){
         $(".category-name").text(data["name"])
+        $(".next-category").attr("data-id", data["id"])
       })
     })
-
   })
 </script>
