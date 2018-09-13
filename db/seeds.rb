@@ -12,9 +12,9 @@
 @c4 = Category.find_or_create_by(name: "Tech Equipment")
 @c5 = Category.find_or_create_by(name: "Art Supplies")
 
-@s1 = Supply.find_or_create_by(name: "Tom Sawyer", price: "7.99", quantity: 30, description: "Need 30 books for 7th grade class.", category_id: 1)
-@s2 = Supply.find_or_create_by(name: "Bookshelves", price: "70", quantity: 3, description: "Need new bookshelves for classroom.", category_id: 2)
-@s3 = Supply.find_or_create_by(name: "Binders", price: "4.99", quantity: 11, description: "Need binders to organize classroom", category_id: 3)
+@s1 = Supply.find_or_create_by(name: "Tom Sawyer", price: "7.99", quantity: 30, description: "Need 30 books for 7th grade class.", category_id: 1, user_id: 2)
+@s2 = Supply.find_or_create_by(name: "Bookshelves", price: "70", quantity: 3, description: "Need new bookshelves for classroom.", category_id: 2, user_id: 2)
+@s3 = Supply.find_or_create_by(name: "Binders", price: "4.99", quantity: 11, description: "Need binders to organize classroom", category_id: 3, user_id: 2)
 
 
 @s4 = Supply.find_or_create_by(name: "Lord of the Rings", price: "11.99", quantity: 20, category_id: 1)
