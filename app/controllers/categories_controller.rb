@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
     if current_user
       @category = Category.find(params[:id])
       @supply = @category.supplies.most_donations(@category).first
+      @user = current_user
     else
       redirect_to new_user_session_path
     end

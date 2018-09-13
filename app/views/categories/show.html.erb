@@ -1,15 +1,16 @@
 
 
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
-<button class = "prev-category" data-id="<%=@category.id%>" data-userid="<%=current_user.id%>">Previous Category </button> || <button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
+<button class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 
-<button class="next-supply" data-id="<%=@category.id%>"> Next Supply </button>
+<button class="next-supply" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
   <div class="supply-info">
   <h4 class="supply-heading"> hi</h4> <br>
   <p class="supply-price"> </p>
   <p class="supply-quantity"> </p>
   <p class="supply-description"></p>
+  <p class="edit-delete-supply"></p>
     <% if current_user.id == @supply.user_id%>
       <p><%= link_to "Edit", edit_category_supply_path(@category, @supply)%></p>
       <p><%= link_to "Delete", category_supply_destroy_path(@category, @supply), method: :delete, data: { confirm: "Are you sure?" }%></p>
@@ -47,6 +48,7 @@
     })
     let i = 0; /* in order to go through all of the supplies in the JSON */
     $(".next-supply").on("click", function(){
+      var user = $(this).attr("data-userid");
       var id = $(this).attr("data-id")
       $.get("/categories/" + id + ".json", function(data){
         var supplies = data.supplies
@@ -55,6 +57,11 @@
         $(".supply-quantity").text(supplies[i].quantity);
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("data-id", supplies[i].id)
+        console.log(user)
+        console.log(supplies.user_id)
+        if(user === supplies.user_id){
+          $(".edit-delete-supply").text("<a>hi</a>")
+        }
         i+=1
       })
     })
