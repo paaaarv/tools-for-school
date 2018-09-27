@@ -3,6 +3,7 @@ class SuppliesController < ApplicationController
   before_action :logged_in?
 
   def new
+    @categories = Category.all
     @category = Category.find(params[:category_id])
     @supply = Supply.new
     authorize @supply

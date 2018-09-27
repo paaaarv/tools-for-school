@@ -41,6 +41,7 @@
       }
       /*must disable button for previous/next on first and last elements*/
       $.get("/categories/" + categoryId + ".json", function(data){
+
         $(".category-name").text(data["name"])
         $(".next-category").attr("data-id", data["id"])
         $(".prev-category").attr("data-id", data["id"])
@@ -57,8 +58,6 @@
         $(".supply-quantity").text(supplies[i].quantity);
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("data-id", supplies[i].id)
-        console.log(user)
-        console.log(supplies.user_id)
         if(user === supplies.user_id){
           $(".edit-delete-supply").text("<a>hi</a>")
         }

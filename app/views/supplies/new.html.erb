@@ -7,3 +7,16 @@
 <%= form_for @supply, url: category_supplies_path(@category.id) do |f|%>
 <%= render partial: 'form', locals: {f: f} %>
 <%end%>
+
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $('form').submit(function(event){
+      event.preventDefault();
+      var values = $(this).serialize()
+      console.log(values)
+    })
+  })
+
+</script>
