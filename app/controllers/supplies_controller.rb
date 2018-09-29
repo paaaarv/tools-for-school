@@ -16,7 +16,7 @@ class SuppliesController < ApplicationController
   end
 
   def create
-    @category = Category.find(params[:category_id])
+    @category = Category.find(params[:supply][:category_id])
     @supply = Supply.new(supply_params)
     if @supply.save
       redirect_to '/'

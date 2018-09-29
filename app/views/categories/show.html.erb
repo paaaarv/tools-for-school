@@ -11,10 +11,10 @@
   <p class="supply-quantity"> </p>
   <p class="supply-description"></p>
   <p class="edit-delete-supply"></p>
-    <% if current_user.id == @supply.user_id%>
+    <!---<% if current_user.id == @supply.user_id%>
       <p><%= link_to "Edit", edit_category_supply_path(@category, @supply)%></p>
       <p><%= link_to "Delete", category_supply_destroy_path(@category, @supply), method: :delete, data: { confirm: "Are you sure?" }%></p>
-    <%end%>
+    <%end%>-->
   </div>
 
 
@@ -43,9 +43,12 @@
       $.get("/categories/" + categoryId + ".json", function(data){
         console.log(data)
         $(".category-name").text(data["name"])
+        /*got the supply to be the same category id as the category shown */
         $("next-supply").attr("data-id", categoryId)
         $(".next-category").attr("data-id", data["id"])
         $(".prev-category").attr("data-id", data["id"])
+        /* need to have the supply change to the first supply of the new category*/
+
       })
     })
     let i = 0; /* in order to go through all of the supplies in the JSON */

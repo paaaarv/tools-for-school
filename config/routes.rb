@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       delete '/destroy' => "supplies#destroy"
     end
   end
+  resources :supplies, only: [:new, :create]
   get '/users/my_profile' => 'users#show'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
 

@@ -4,7 +4,7 @@
 <%= render partial:'errors'%>
 <br>
 <br>
-<%= form_for @supply, url: category_supplies_path(@category.id) do |f|%>
+<%= form_for @supply, url: supplies_path do |f|%>
 <%= render partial: 'form', locals: {f: f} %>
 <%end%>
 
@@ -15,7 +15,12 @@
     $('form').submit(function(event){
       event.preventDefault();
       var values = $(this).serialize()
-      console.log(values)
+      var posting = $.post("/supplies", values)
+      posting.done(function(data){
+        var supply = data
+        console.log(data)
+      })
+
     })
   })
 
