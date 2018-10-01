@@ -1,7 +1,7 @@
 
 
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
-<button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button class="next-category" data-id="<%=@category.id%>"> Next Category</button>
+<button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 
 <button class="next-supply" supplyData-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
@@ -40,12 +40,17 @@
       else{
         --categoryId ;
       }
-      /*must disable button for previous/next on first and last elements*/
+      /*must disable button for next on last elements*/
 
       if(categoryId > 1){
         $('.prev-category').prop('disabled', false)
       }else{
           $('.prev-category').prop('disabled', true)
+      }
+      if($(this).attr("last-category-id") == categoryId){
+        $(".next-category").prop("disabled", true)
+      }else{
+        $(".next-category").prop("disabled",false)
       }
       $(".next-supply").attr("data-id", categoryId)
       $.get("/categories/" + categoryId + ".json", function(data){
