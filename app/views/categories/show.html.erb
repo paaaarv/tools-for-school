@@ -74,13 +74,15 @@
         $(".supply-quantity").text(supplies[i].quantity);
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("supplyData-id", supplies[i].id)
-        if(user === supplies[i].user_id){
-
-          $(".edit-delete-supply").text("<a>hi</a>")
+        if(user == supplies[i].user_id){
+          $(".edit-delete-supply").append("<button class='edit-supply'>Edit</button>")
+          $(".edit-delete-supply").append("<button class='delete-supply'>Delete</button>")
         }
         i+=1
       })
     })
-
+    $(".edit-supply").on("click", function(){
+      
+    })
   })
 </script>
