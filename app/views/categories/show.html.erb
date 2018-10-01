@@ -66,7 +66,8 @@
     let i = 0; /* in order to go through all of the supplies in the JSON */
     $(".next-supply").on("click", function(){
       var user = $(this).attr("data-userid");
-      var id = $(this).attr("data-id")
+      var id = $(this).attr("data-id");
+      var supplyId = $(this).attr("supplyData-id");
       $.get("/categories/" + id + ".json", function(data){
         var supplies = data.supplies
         $(".supply-heading").text(supplies[i].name)
@@ -75,14 +76,14 @@
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("supplyData-id", supplies[i].id)
         if(user == supplies[i].user_id){
-          $(".edit-delete-supply").append("<button class='edit-supply'>Edit</button>")
+          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a>')
           $(".edit-delete-supply").append("<button class='delete-supply'>Delete</button>")
         }
         i+=1
       })
     })
     $(".edit-supply").on("click", function(){
-      
+
     })
   })
 </script>

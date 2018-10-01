@@ -27,6 +27,7 @@ class SuppliesController < ApplicationController
 
   def edit
     @category = Category.find(params[:category_id])
+    @categories = Category.all
     @supply = Supply.find(params[:id])
     authorize @supply
   end
