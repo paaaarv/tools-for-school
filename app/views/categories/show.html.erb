@@ -1,5 +1,4 @@
 
-
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
 <button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
@@ -7,9 +6,9 @@
 <button class="next-supply" supplyData-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
   <div class="supply-info">
   <h4 class="supply-heading"> hi</h4> <br>
-  <p class="supply-price"> </p>
-  <p class="supply-quantity"> </p>
-  <p class="supply-description"></p>
+  <p>PRICE: <span class="supply-price"></span> </p>
+  <p> QUANTITY: <span class="supply-quantity"> </span></p>
+  <p> DESCRIPTION: <span class="supply-description"><span></p>
   <p class="edit-delete-supply"></p>
     <!---<% if current_user.id == @supply.user_id%>
       <p><%= link_to "Edit", edit_category_supply_path(@category, @supply)%></p>
@@ -75,11 +74,13 @@
         $(".supply-quantity").text(supplies[i].quantity);
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("supplyData-id", supplies[i].id)
-        if(user === supplies.user_id){
+        if(user === supplies[i].user_id){
+
           $(".edit-delete-supply").text("<a>hi</a>")
         }
         i+=1
       })
     })
+
   })
 </script>
