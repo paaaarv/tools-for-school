@@ -10,10 +10,6 @@
   <p> QUANTITY: <span class="supply-quantity"> </span></p>
   <p> DESCRIPTION: <span class="supply-description"><span></p>
   <p class="edit-delete-supply"></p>
-    <!---<% if current_user.id == @supply.user_id%>
-      <p><%= link_to "Edit", edit_category_supply_path(@category, @supply)%></p>
-      <p><%= link_to "Delete", category_supply_destroy_path(@category, @supply), method: :delete, data: { confirm: "Are you sure?" }%></p>
-    <%end%>-->
   </div>
 
 
@@ -65,6 +61,7 @@
     })
     let i = 0; /* in order to go through all of the supplies in the JSON */
     $(".next-supply").on("click", function(){
+      $(".edit-delete-supply").text("");
       var user = $(this).attr("data-userid");
       var id = $(this).attr("data-id");
       var supplyId = $(this).attr("supplyData-id");
@@ -75,9 +72,10 @@
         $(".supply-quantity").text(supplies[i].quantity);
         $(".supply-description").text(supplies[i].description)
         $(".next-supply").attr("supplyData-id", supplies[i].id)
+        supplyId = $(this).attr("supplyData-id");
         if(user == supplies[i].user_id){
-          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a>')
-          $(".edit-delete-supply").append("<button class='delete-supply'>Delete</button>")
+          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <a href="/supplies/'+ supplyId + '/destroy" data-method="delete"  class="delete-supply">Delete</a> ')
+          /*$(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/destroy" class="delete-supply">Delete</button>')*/
         }
         i+=1
       })
@@ -85,5 +83,6 @@
     $(".edit-supply").on("click", function(){
 
     })
+
   })
 </script>
