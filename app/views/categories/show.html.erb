@@ -40,9 +40,9 @@
         var categoryId = parseInt($(".prev-category").attr('data-id')) -1;
       }
       /*must disable button for previous/next on first and last elements*/
-      if($(this).attr("data-id") === 1){
-        $(".prev-category").disabled = true
-
+  
+      if(categoryId > 1){
+        $('.prev-category').prop('disabled', false)
       }
       $(".next-supply").attr("data-id", categoryId)
       $.get("/categories/" + categoryId + ".json", function(data){
