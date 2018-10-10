@@ -3,7 +3,7 @@
 <button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 
-<button class="next-supply" supplyData-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
+<button class="next-supply" lastsupply-id="0" supplydata-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
   <div class="supply-info">
   <h4 class="supply-heading"> hi</h4> <br>
   <p>PRICE: <span class="supply-price"></span> </p>
@@ -67,7 +67,7 @@
       $(".edit-delete-supply").text("");
       var user = $(this).attr("data-userid");
       var id = $(this).attr("data-id");
-      var supplyId = $(this).attr("supplyData-id");
+      var supplyId = $(this).attr("supplydata-id");
 
       $.get("/categories/" + id + ".json", function(data){
         var supplies = data["supplies"]
@@ -75,7 +75,14 @@
         $(".supply-price").text(supplies[i]["price"]);
         $(".supply-quantity").text(supplies[i]["quantity"]);
         $(".supply-description").text(supplies[i]["description"])
-        $(".next-supply").attr("supplyData-id", supplies[i]["id"])
+        $(".next-supply").attr("supplydata-id", supplies[i]["id"])
+        $(".next-supply").attr("lastsupply-id", supplies[supplies.length-1]["id"])
+        /*disable next supply button*/
+        if ($(".next-supply").attr("supplydata-id") == $(".next-supply").attr("lastsupply-id")){
+          $(".next-supply").prop("disabled", true)
+        }else{
+          $(".next-supply").prop("disabled",false)
+        }
         supplyId = $(this).attr("supplyData-id");
         if(user == supplies[i].user_id){
           /* need to fix delete link*/
