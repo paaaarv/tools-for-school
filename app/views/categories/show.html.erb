@@ -36,7 +36,11 @@
         --categoryId ;
       }
       /*must disable button for next on last elements*/
-
+      if ($(".next-category").attr("last-category-id") == $(".next-category").attr("data-id")){
+        $(".next-category").prop('disabled', true)
+      }else{
+        $(".next-category").prop('disabled', false)
+      }
       if(categoryId > 1){
         $('.prev-category').prop('disabled', false)
       }else{
@@ -74,14 +78,15 @@
         $(".next-supply").attr("supplyData-id", supplies[i].id)
         supplyId = $(this).attr("supplyData-id");
         if(user == supplies[i].user_id){
-          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <a href="/supplies/'+ supplyId + '/destroy" data-method="delete"  class="delete-supply">Delete</a> ')
+          /* need to fix delete link*/
+          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <button class="delete-supply">Delete</button> ')
           /*$(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/destroy" class="delete-supply">Delete</button>')*/
         }
         i+=1
       })
     })
-    $(".edit-supply").on("click", function(){
-
+    $(".delete-supply").on("click", function(){
+      $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
     })
 
   })
