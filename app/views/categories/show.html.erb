@@ -27,7 +27,8 @@
 
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
-    var categoryId,i
+    var categoryId
+    let i=0
     $(".next-category, .prev-category").on("click", function(){
       i=0
       if($(this).attr("class") === "next-category"){
@@ -88,5 +89,8 @@
       $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
     })
 
+  })
+  $(document).ready(function(){
+    $(".next-supply").trigger('click')
   })
 </script>
