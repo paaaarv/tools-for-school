@@ -2,7 +2,7 @@
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
 <button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
-
+<button class="prev-supply" firstsupply-id="0" supplydata-id="0" data-id="<%=@category.id%>" data-userid="<%=@user.id%>"> Previous Supply</button>
 <button class="next-supply" lastsupply-id="0" supplydata-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
   <div class="supply-info">
   <h4 class="supply-heading"> hi</h4> <br>
@@ -28,7 +28,7 @@
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
     var categoryId
-    let i=0
+    let i=-1
     $(".next-category, .prev-category").on("click", function(){
       i=0
       if($(this).attr("class") === "next-category"){
@@ -63,33 +63,47 @@
 
       })
     })
-    $(".next-supply").on("click", function(){
+    $(".next-supply").on('click', function(){
+      i+=1
+    })
+    $(".prev-supply").on('click', function(){
+      i-=1
+    })
+    $(".prev-supply, .next-supply").on("click", function(){
       $(".edit-delete-supply").text("");
       var user = $(this).attr("data-userid");
       var id = $(this).attr("data-id");
       var supplyId = $(this).attr("supplydata-id");
-
       $.get("/categories/" + id + ".json", function(data){
         var supplies = data["supplies"]
+        console.log(i)
         $(".supply-heading").text(supplies[i]["name"])
         $(".supply-price").text(supplies[i]["price"]);
         $(".supply-quantity").text(supplies[i]["quantity"]);
         $(".supply-description").text(supplies[i]["description"])
-        $(".next-supply").attr("supplydata-id", supplies[i]["id"])
+        $(".prev-supply, .next-supply").attr("supplydata-id", supplies[i]["id"])
         $(".next-supply").attr("lastsupply-id", supplies[supplies.length-1]["id"])
+        $(".prev-supply").attr("firstsupply-id", supplies[0]["id"])
         /*disable next supply button*/
         if ($(".next-supply").attr("supplydata-id") == $(".next-supply").attr("lastsupply-id")){
           $(".next-supply").prop("disabled", true)
         }else{
           $(".next-supply").prop("disabled",false)
+
         }
+        if ($(".prev-supply").attr("supplydata-id") == $(".prev-supply").attr("firstsupply-id")){
+          $(".prev-supply").prop("disabled", true)
+        }else{
+          $(".prev-supply").prop("disabled",false)
+
+        }
+
         supplyId = $(this).attr("supplyData-id");
         if(user == supplies[i].user_id){
           /* need to fix delete link*/
           $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <button class="delete-supply">Delete</button> ')
           /*$(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/destroy" class="delete-supply">Delete</button>')*/
         }
-        i+=1
       })
     })
     $(".delete-supply").on("click", function(){
