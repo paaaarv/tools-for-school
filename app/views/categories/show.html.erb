@@ -1,6 +1,6 @@
 
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
-<button disabled class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
+<button class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 <button class="prev-supply" firstsupply-id="0" supplydata-id="0" data-id="<%=@category.id%>" data-userid="<%=@user.id%>"> Previous Supply</button>
 <button class="next-supply" lastsupply-id="0" supplydata-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
@@ -36,19 +36,9 @@
         categoryId = parseInt($(".next-category").attr("data-id")) + 1;
       }
       else{
-        --categoryId ;
+        categoryId = parseInt($(".prev-category").attr("data-id"))-1 ;
       }
-      /*disables button for first and last elements*/
-      if ($(".next-category").attr("last-category-id") == categoryId){
-        $(".next-category").prop('disabled', true)
-      }else{
-        $(".next-category").prop('disabled', false)
-      }
-      if(categoryId > 1){
-        $('.prev-category').prop('disabled', false)
-      }else{
-          $('.prev-category').prop('disabled', true)
-      }
+
       /* make the current supply data-id the next/previous category id*/
       $(".next-supply").attr("data-id", categoryId)
       $(".next-supply").click()
@@ -62,6 +52,17 @@
         /* need to have the supply change to the first supply of the new category*/
         $(".next-supply").attr("data-id", data["id"])
 
+        /*disables button for first and last elements*/
+        if ($(".next-category").attr("last-category-id") == categoryId){
+          $(".next-category").prop('disabled', true)
+        }else{
+          $(".next-category").prop('disabled', false)
+        }
+        if($(".prev-category").attr("data-id") == 1){
+          $('.prev-category').prop('disabled', true)
+        }else{
+            $('.prev-category').prop('disabled', false)
+        }
       })
     })
     /*previous and next supply button correctly showing supply*/
@@ -99,7 +100,7 @@
 
         }
 
-        supplyId = $(this).attr("supplydata-id");
+        supplyId = $(".next-supply").attr("supplydata-id");
         if(user == supplies[i].user_id){
           /* need to fix delete link*/
           $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <button class="delete-supply">Delete</button> ')
@@ -114,5 +115,10 @@
   })
   $(document).ready(function(){
     $(".next-supply").trigger('click')
+    if($(".prev-category").attr("data-id") == 1){
+      $('.prev-category').prop('disabled', true)
+    }else{
+        $('.prev-category').prop('disabled', false)
+    }
   })
 </script>
