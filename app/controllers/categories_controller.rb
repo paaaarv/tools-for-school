@@ -9,7 +9,8 @@ class CategoriesController < ApplicationController
   def show
     if current_user
       @category = Category.find(params[:id])
-      @supply = @category.supplies.most_donations(@category).first
+      @supply= Supply.new
+      @categories = Category.all
       @user = current_user
     else
       redirect_to new_user_session_path

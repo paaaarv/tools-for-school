@@ -12,18 +12,23 @@
   <p class="edit-delete-supply"></p>
   </div>
 
+<br><br>
 
 
 
 
-
-  <%= render partial: 'supplies/donate', locals: {supply:@supply}%>
+  <!-- render partial: 'supplies/donate', locals: {supply:@supply}-->
 
 
 <%if current_user.admin?%>
-  <h4> <%= link_to "Add a new supply", new_category_supply_path(@category.id)%> </h4>
+<div class="supply-form">
+  <h3> Add a new supply! </h3>
+  <%= form_for @supply do |f| %>
+  <%= render partial: '/supplies/form' ,locals: {f: f}%>
+  <%end%>
+</div>
 <%end%>
-
+<br><br>
 
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
@@ -110,6 +115,11 @@
     })
     $(".delete-supply").on("click", function(){
       $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
+    })
+    /*posting a new supply dynamically function*/
+    $(".add-supply").on("click", function(){
+      var categoryFormId = $(".prev-category").attr("data-id")
+
     })
 
   })

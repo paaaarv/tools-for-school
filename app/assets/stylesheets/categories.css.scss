@@ -20,6 +20,11 @@ margin-left: 20px;
 
 
 }
+.supply-heading {
+  font-size: 70px;
+
+}
+
 h4 {
 
    font-size: 40px;
@@ -33,9 +38,21 @@ button {
 
 
 }
+.supply-form{
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 4px;
+  width: 400px;
+  height: 600px;
+  text-align: center;
+  display: inline-block;
 
+
+}
 
 body{
   font-family: 'Amatic SC', cursive;
+  text-align: center;
 
 }
