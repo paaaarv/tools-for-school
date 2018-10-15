@@ -2,7 +2,8 @@
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
 <button class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
-<button class="prev-supply" firstsupply-id="0" supplydata-id="0" data-id="<%=@category.id%>" data-userid="<%=@user.id%>"> Previous Supply</button>
+<div class= "supply-div"> </div>
+<!--<button class="prev-supply" firstsupply-id="0" supplydata-id="0" data-id="<%=@category.id%>" data-userid="<%=@user.id%>"> Previous Supply</button>
 <button class="next-supply" lastsupply-id="0" supplydata-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
   <div class="supply-info">
   <h4 class="supply-heading"> hi</h4> <br>
@@ -10,7 +11,7 @@
   <p> QUANTITY: <span class="supply-quantity"> </span></p>
   <p> DESCRIPTION: <span class="supply-description"><span></p>
   <p class="edit-delete-supply"></p>
-  </div>
+</div>-->
 
 <br><br>
 
@@ -50,6 +51,13 @@
       $.get("/categories/" + categoryId + ".json", function(data){
 
         $(".category-name").text(data["name"])
+        var supplies = data['supplies']
+
+        console.log(supplies)
+        for(let x= 0; x < supplies.length; x++){
+          $(".supply-div").append("<h3>" + supplies[x]['name']+ "</h3><br> <h4> Price:" + supplies[x]['price']+" | Quantity: " + supplies[x]['quantity']+ "</h4> <br> ")
+          console.log(supplies[x])
+        }
         /*got the supply to be the same category id as the category shown */
         $(".supply-heading").text(data["supplies"]["name"])
         $(".next-category").attr("data-id", data["id"])
@@ -117,7 +125,8 @@
       $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
     })
     /*posting a new supply dynamically function*/
-    $(".add-supply").on("click", function(){
+    $("form").submit(function(event){
+      event.preventDefault();
       var categoryFormId = $(".prev-category").attr("data-id")
 
     })
