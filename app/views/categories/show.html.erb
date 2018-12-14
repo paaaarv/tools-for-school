@@ -1,17 +1,9 @@
 
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
-<button class = "prev-category" data-id="<%=@category.id%>">Previous Category </button> || <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
+<button class = "prev-category" user-id= "<%=current_user.id%>" data-id="<%=@category.id%>">Previous Category </button> <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 <div class= "supply-div"> </div>
-<!--<button class="prev-supply" firstsupply-id="0" supplydata-id="0" data-id="<%=@category.id%>" data-userid="<%=@user.id%>"> Previous Supply</button>
-<button class="next-supply" lastsupply-id="0" supplydata-id="1" data-id="<%=@category.id%>"data-userid="<%=@user.id%>"> Next Supply </button>
-  <div class="supply-info">
-  <h4 class="supply-heading"> hi</h4> <br>
-  <p>PRICE: <span class="supply-price"></span> </p>
-  <p> QUANTITY: <span class="supply-quantity"> </span></p>
-  <p> DESCRIPTION: <span class="supply-description"><span></p>
-  <p class="edit-delete-supply"></p>
-</div>-->
+
 
 <br><br>
 
@@ -33,11 +25,11 @@
 
 <script type = "text/javascript" charset = "utf-8">
   $(function(){
-    var categoryId, supplyId
+    var categoryId
     let i=-1
     $(".next-category, .prev-category").on("click", function(){
       i=-1
-
+      $(".supply-div").text("")
       if($(this).attr("class") === "next-category"){
         categoryId = parseInt($(".next-category").attr("data-id")) + 1;
       }
@@ -46,24 +38,23 @@
       }
 
       /* make the current supply data-id the next/previous category id*/
-      $(".next-supply").attr("data-id", categoryId)
-      $(".next-supply").click()
       $.get("/categories/" + categoryId + ".json", function(data){
 
         $(".category-name").text(data["name"])
         var supplies = data['supplies']
-
-        console.log(supplies)
         for(let x= 0; x < supplies.length; x++){
-          $(".supply-div").append("<h3>" + supplies[x]['name']+ "</h3><br> <h4> Price:" + supplies[x]['price']+" | Quantity: " + supplies[x]['quantity']+ "</h4> <br> ")
-          console.log(supplies[x])
+          $(".supply-div").append("<h3 user-id=''>" + supplies[x]['name']+ "</h3><br> <h4> Price: $" + supplies[x]['price']+" | Quantity: " + supplies[x]['quantity']+ "</h4> <br>")
+          if(supplies[x]['description'] != null){
+            $(".supply-div").append("<p>" + supplies[x]['description'] + "</p>")
+          }
+          /*add edit and delete links if user created supply, otherwise donate form */
+          if($('.prev-category').attr("user-id") == supplies[x]["user_id"]){
+          $(".supply-div").append("<a href='/categories/"+categoryId+"/supplies/"+supplies[x]["id"]+"/edit'>Edit Supply </a> <a href= delete-id = '"+ supplies[x]["id"]+"'class='delete-supply'> Delete Supply </button>")
         }
-        /*got the supply to be the same category id as the category shown */
-        $(".supply-heading").text(data["supplies"]["name"])
+      }
         $(".next-category").attr("data-id", data["id"])
         $(".prev-category").attr("data-id", data["id"])
-        /* need to have the supply change to the first supply of the new category*/
-        $(".next-supply").attr("data-id", data["id"])
+
 
         /*disables button for first and last elements*/
         if ($(".next-category").attr("last-category-id") == categoryId){
@@ -78,49 +69,7 @@
         }
       })
     })
-    /*previous and next supply button correctly showing supply*/
-    $(".next-supply").on('click', function(){
-      i+=1
-    })
-    $(".prev-supply").on('click', function(){
-      i-=1
-    })
-    /*previous and next supply button adding supply information to DOM*/
-    $(".prev-supply, .next-supply").on("click", function(){
-      $(".edit-delete-supply").text("");
-      var user = $(this).attr("data-userid");
-      var id = $(this).attr("data-id");
-      $.get("/categories/" + id + ".json", function(data){
-        var supplies = data["supplies"]
-        $(".supply-heading").text(supplies[i]["name"])
-        $(".supply-price").text(supplies[i]["price"]);
-        $(".supply-quantity").text(supplies[i]["quantity"]);
-        $(".supply-description").text(supplies[i]["description"])
-        $(".prev-supply, .next-supply").attr("supplydata-id", supplies[i]["id"])
-        $(".next-supply").attr("lastsupply-id", supplies[supplies.length-1]["id"])
-        $(".prev-supply").attr("firstsupply-id", supplies[0]["id"])
-        /*disable next supply button*/
-        if ($(".next-supply").attr("supplydata-id") == $(".next-supply").attr("lastsupply-id")){
-          $(".next-supply").prop("disabled", true)
-        }else{
-          $(".next-supply").prop("disabled",false)
-
-        }
-        if ($(".prev-supply").attr("supplydata-id") == $(".prev-supply").attr("firstsupply-id")){
-          $(".prev-supply").prop("disabled", true)
-        }else{
-          $(".prev-supply").prop("disabled",false)
-
-        }
-
-        supplyId = $(".next-supply").attr("supplydata-id");
-        if(user == supplies[i].user_id){
-          /* need to fix delete link*/
-          $(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/edit" class="edit-supply">Edit</a> || <button class="delete-supply">Delete</button> ')
-          /*$(".edit-delete-supply").append('<a href="/categories/' + id + '/supplies/' + supplyId + '/destroy" class="delete-supply">Delete</button>')*/
-        }
-      })
-    })
+    
     $(".delete-supply").on("click", function(){
       $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
     })
@@ -128,16 +77,19 @@
     $("form").submit(function(event){
       event.preventDefault();
       var categoryFormId = $(".prev-category").attr("data-id")
-
-    })
+      var values = $(this).serialize();
+      var posting = $.post('/categories/' + categoryFormId + '/supplies', values)
+      posting.done(function(data) {
+        var supply = data;
+          })
 
   })
   $(document).ready(function(){
-    $(".next-supply").trigger('click')
     if($(".prev-category").attr("data-id") == 1){
       $('.prev-category').prop('disabled', true)
     }else{
         $('.prev-category').prop('disabled', false)
     }
   })
+})
 </script>

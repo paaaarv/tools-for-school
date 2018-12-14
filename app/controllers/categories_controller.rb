@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
     if current_user
       @category = Category.find(params[:id])
       @supply= Supply.new
+      @supplyone = Supply.most_donations(@category).first
       @categories = Category.all
       @user = current_user
     else

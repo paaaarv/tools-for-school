@@ -16,10 +16,9 @@ class SuppliesController < ApplicationController
   end
 
   def create
-    @category = Category.find(params[:supply][:category_id])
     @supply = Supply.new(supply_params)
     if @supply.save
-      redirect_to '/'
+      render json: @supply, status: 201
     else
       render :new
     end
@@ -70,6 +69,6 @@ class SuppliesController < ApplicationController
   private
 
   def supply_params
-    params.require(:supply).permit(:name, :price, :quantity, :description, :category_id, :user_id)
+    params.require(:supply).permit(:name, :category_id, :price, :quantity, :description, :user_id)
   end
 end
