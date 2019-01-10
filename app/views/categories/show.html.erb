@@ -2,25 +2,25 @@
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
 <button class = "prev-category" user-id= "<%=current_user.id%>" data-id="<%=@category.id%>">Previous Category </button> <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
+<%if current_user.admin?%>
+  <button class="add-supply"> Add a new supply! </button>
+<%end%>
 <div class= "supply-div"> </div>
 
-
-<br><br>
-
+<br>
 
 
 
   <!-- render partial: 'supplies/donate', locals: {supply:@supply}-->
 
 
-<%if current_user.admin?%>
+
 <div class="supply-form">
   <h3> Add a new supply! </h3>
   <%= form_for @supply do |f| %>
   <%= render partial: '/supplies/form' ,locals: {f: f}%>
   <%end%>
 </div>
-<%end%>
 <br><br>
 
 <script type = "text/javascript" charset = "utf-8">
@@ -30,6 +30,7 @@
     $(".next-category, .prev-category").on("click", function(){
       i=-1
       $(".supply-div").text("")
+      $('.supply-form').css("visibility", "hidden")
       if($(this).attr("class") === "next-category"){
         categoryId = parseInt($(".next-category").attr("data-id")) + 1;
       }
@@ -69,9 +70,12 @@
         }
       })
     })
-    
+
     $(".delete-supply").on("click", function(){
       $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
+    })
+    $(".add-supply").on("click", function(){
+      $(".supply-form").css('visibility','visible')
     })
     /*posting a new supply dynamically function*/
     $("form").submit(function(event){
