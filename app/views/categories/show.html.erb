@@ -2,11 +2,19 @@
 <h1 class="category-name"> <%= @category.name%> </h1> <br>
 <button class = "prev-category" user-id= "<%=current_user.id%>" data-id="<%=@category.id%>">Previous Category </button> <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
+
+
 <%if current_user.admin?%>
   <button class="add-supply"> Add a new supply! </button>
 <%end%>
-<div class= "supply-div"> </div>
-
+<div class= "supply-div">
+  <% @category.supplies.each do | supply|%>
+    <h3><%=supply.name%></h3><br> <h4> Price: <%=supply.price%> | Quantity: <%=supply.quantity%> </h4> <br>
+    <%if supply.description?%>
+    <p><%=supply.description%></p>
+    <%end%>
+    <%end%>
+</div>
 <br>
 
 
@@ -45,6 +53,7 @@
         var supplies = data['supplies']
         for(let x= 0; x < supplies.length; x++){
           $(".supply-div").append("<h3 user-id=''>" + supplies[x]['name']+ "</h3><br> <h4> Price: $" + supplies[x]['price']+" | Quantity: " + supplies[x]['quantity']+ "</h4> <br>")
+
           if(supplies[x]['description'] != null){
             $(".supply-div").append("<p>" + supplies[x]['description'] + "</p>")
           }
