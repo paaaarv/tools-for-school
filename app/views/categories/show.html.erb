@@ -3,20 +3,23 @@
 <button class = "prev-category" user-id= "<%=current_user.id%>" data-id="<%=@category.id%>">Previous Category </button> <button enabled class="next-category" last-category-id= "<%=Category.last.id%>" data-id="<%=@category.id%>"> Next Category</button>
 <br><br>
 
-
-<%if current_user.admin?%>
-  <button class="add-supply"> Add a new supply! </button>
-<%end%>
 <div class= "supply-div">
   <% @category.supplies.each do | supply|%>
     <h3><%=supply.name%></h3><br> <h4> Price: <%=supply.price%> | Quantity: <%=supply.quantity%> </h4> <br>
     <%if supply.description?%>
     <p><%=supply.description%></p>
     <%end%>
+    <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
+      <p><%= f.text_field :donations, value: "0"%>
+        <%=f.hidden_field :id%>
+      <%=f.submit "Donate now!"%></p>
+      <%end%>
     <%end%>
 </div>
-<br>
 
+<%if current_user.admin?%>
+  <button class="add-supply"> Add a new supply! </button>
+<%end%><br><br>
 
 
   <!-- render partial: 'supplies/donate', locals: {supply:@supply}-->
@@ -90,13 +93,19 @@
     $("form").submit(function(event){
       event.preventDefault();
       var categoryFormId = $(".prev-category").attr("data-id")
+      var supplyFormId = $(this).closest("form").attr("id").slice(-1)
       var values = $(this).serialize();
-      var posting = $.post('/categories/' + categoryFormId + '/supplies', values)
-      posting.done(function(data) {
-        var supply = data;
-          })
+      $.ajax({
+                url: '/categories/' + categoryFormId + '/supplies/' + supplyFormId + "/donate",
+                type: 'PATCH',
+                dataType: "json",
+                data: values,
+                status: "success",
+    msg: "You have liked this status"
+              });
 
   })
+
   $(document).ready(function(){
     if($(".prev-category").attr("data-id") == 1){
       $('.prev-category').prop('disabled', true)

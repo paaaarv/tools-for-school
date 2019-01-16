@@ -58,6 +58,7 @@ class SuppliesController < ApplicationController
     if @supply.valid_donation?
       @supply.save
     end
+    binding.pry
       render :show
   end
 
