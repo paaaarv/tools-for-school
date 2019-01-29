@@ -16,8 +16,11 @@ class SuppliesController < ApplicationController
   end
 
   def create
+    binding.pry
     @supply = Supply.new(supply_params)
+    @supply.category_id = params[:category_id]
     if @supply.save
+      @supply.save
       render json: @supply, status: 201
     else
       render :new
@@ -58,7 +61,6 @@ class SuppliesController < ApplicationController
     if @supply.valid_donation?
       @supply.save
     end
-    binding.pry
       render :show
   end
 

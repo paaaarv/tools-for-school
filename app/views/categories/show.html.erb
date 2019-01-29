@@ -6,9 +6,13 @@
 <div class= "supply-div">
   <% @category.supplies.each do | supply|%>
     <h3><%=supply.name%></h3><br> <h4> Price: <%=supply.price%> | Quantity: <%=supply.quantity%> </h4> <br>
+    <h4><%=number_to_currency(supply.amount_to_goal)%> out of <%=number_to_currency(supply.goal)%> raised. </h4>
     <%if supply.description?%>
     <p><%=supply.description%></p>
     <%end%>
+    <% if supply.user_id == current_user.id%>
+      <a href='/categories/<%=@category.id%>/supplies/<%=supply.id%>/edit'>Edit Supply </a> ||  <a data-method='delete'  href= '/supplies/<%=supply.id%>/destroy' delete-id = '"+ supplies[x]['id']+"'class='delete-supply'> Delete Supply </a>"
+      <%end%>
     <%= form_for supply, url: category_supply_donate_path(@category,supply) do |f|%>
       <p><%= f.text_field :donations, value: "0"%>
         <%=f.hidden_field :id%>
@@ -24,12 +28,11 @@
 
   <!-- render partial: 'supplies/donate', locals: {supply:@supply}-->
 
-
-
 <div class="supply-form">
   <h3> Add a new supply! </h3>
   <%= form_for @supply do |f| %>
   <%= render partial: '/supplies/form' ,locals: {f: f}%>
+
   <%end%>
 </div>
 <br><br>
@@ -62,7 +65,7 @@
           }
           /*add edit and delete links if user created supply, otherwise donate form */
           if($('.prev-category').attr("user-id") == supplies[x]["user_id"]){
-          $(".supply-div").append("<a href='/categories/"+categoryId+"/supplies/"+supplies[x]["id"]+"/edit'>Edit Supply </a> <a href= delete-id = '"+ supplies[x]["id"]+"'class='delete-supply'> Delete Supply </button>")
+          $(".supply-div").append("<a href='/categories/"+categoryId+"/supplies/"+supplies[x]["id"]+"/edit'>Edit Supply </a> || <a data-method='delete'href= '/supplies/"+supplies[x]['id']+"/destroy' delete-id = '"+ supplies[x]['id']+"'class='delete-supply'> Delete Supply </button>")
         }
       }
         $(".next-category").attr("data-id", data["id"])
@@ -83,9 +86,7 @@
       })
     })
 
-    $(".delete-supply").on("click", function(){
-      $.post("/supplies/"+ $(this).attr("delete-id")+"/destroy",{supply_id:$(this).attr("delete-id"),action:'delete'})
-    })
+
     $(".add-supply").on("click", function(){
       $(".supply-form").css('visibility','visible')
     })
@@ -93,18 +94,16 @@
     $("form").submit(function(event){
       event.preventDefault();
       var categoryFormId = $(".prev-category").attr("data-id")
-      var supplyFormId = $(this).closest("form").attr("id").slice(-1)
       var values = $(this).serialize();
-      $.ajax({
-                url: '/categories/' + categoryFormId + '/supplies/' + supplyFormId + "/donate",
-                type: 'PATCH',
-                dataType: "json",
-                data: values,
-                status: "success",
-    msg: "You have liked this status"
-              });
+      var posted = $.post( '/categories/' + categoryFormId + '/supplies', values)
 
-  })
+      posted.done(function(data){
+        var supply = data
+        $('.supply-div').append("<h3 user-id=''>" + document.getElementById("supply_name").value+ "</h3><br> <h4> Price: $" + document.getElementById("supply_price").value+" | Quantity: " + document.getElementById("supply_quantity").value+ "</h4> <br> ")
+
+
+      })
+    })
 
   $(document).ready(function(){
     if($(".prev-category").attr("data-id") == 1){
