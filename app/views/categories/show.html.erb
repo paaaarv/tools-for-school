@@ -5,8 +5,8 @@
 
 <div class= "supply-div">
   <% @category.supplies.each do | supply|%>
-    <h3><%=supply.name%></h3><br> <h4> Price: <%=supply.price%> | Quantity: <%=supply.quantity%> </h4> <br>
-    <h4><%=number_to_currency(supply.amount_to_goal)%> out of <%=number_to_currency(supply.goal)%> raised. </h4>
+    <h3><%=supply.name%></h3><br> <h4> Price: <%=number_to_currency(supply.price)%> | Quantity: <%=supply.quantity%> </h4> <br>
+    <h4><%=number_to_currency(supply.donations)%> out of <%=number_to_currency(supply.goal)%> raised. </h4>
     <%if supply.description?%>
     <p><%=supply.description%></p>
     <%end%>
@@ -26,7 +26,6 @@
 <%end%><br><br>
 
 
-  <!-- render partial: 'supplies/donate', locals: {supply:@supply}-->
 
 <div class="supply-form">
   <h3> Add a new supply! </h3>
@@ -43,6 +42,7 @@
     let i=-1
     $(".next-category, .prev-category").on("click", function(){
       i=-1
+      /*reset supply-div and visibility of add supply form */
       $(".supply-div").text("")
       $('.supply-form').css("visibility", "hidden")
       if($(this).attr("class") === "next-category"){
@@ -59,7 +59,7 @@
         var supplies = data['supplies']
         for(let x= 0; x < supplies.length; x++){
           /* new supply object w method to format*/
-          var supplyObject = new Supply(supplies[x]['name'], supplies[x]['price'], supplies[x]['quantity'], supplies[x]['description'], supplies[x]['donations'] )
+          var supplyObject = new Supply(supplies[x]['name'], supplies[x]['price'], supplies[x]['quantity'], supplies[x]['description'], supplies[x]['donations'], categoryId, x )
           $(".supply-div").append(supplyObject.formatted())
           /*add edit and delete links if user created supply, otherwise donate form */
           if($('.prev-category').attr("user-id") == supplies[x]["user_id"]){
@@ -97,8 +97,8 @@
       var posted = $.post( '/categories/' + categoryFormId + '/supplies', values)
 
       posted.done(function(data){
-      
-        var newSupply = new Supply(data.name, data.price, data.quantity, data.description, data.donations)
+
+        var newSupply = new Supply(data.name, data.price, data.quantity, data.description, data.donations, data.category_id, data.id)
         $('.supply-div').append(newSupply.formatted())
 
 

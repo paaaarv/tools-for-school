@@ -16,7 +16,6 @@ class SuppliesController < ApplicationController
   end
 
   def create
-    binding.pry
     @supply = Supply.new(supply_params)
     @supply.category_id = params[:category_id]
     if @supply.save
@@ -54,7 +53,6 @@ class SuppliesController < ApplicationController
   end
 
   def donate
-    binding.pry
     @supply = Supply.find(params[:supply_id])
     @category = @supply.category
     donations = params[:supply][:donations].to_f
