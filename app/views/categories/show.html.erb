@@ -53,13 +53,16 @@
       }
 
       /* make the current supply data-id the next/previous category id*/
+
       $.get("/categories/" + categoryId + ".json", function(data){
 
         $(".category-name").text(data["name"])
         var supplies = data['supplies']
+        var authToken = $('[name="csrf-token"]')[0].content
         for(let x= 0; x < supplies.length; x++){
           /* new supply object w method to format*/
-          var supplyObject = new Supply(supplies[x]['name'], supplies[x]['price'], supplies[x]['quantity'], supplies[x]['description'], supplies[x]['donations'], categoryId, x )
+          var supplyObject = new Supply(supplies[x]['name'], supplies[x]['price'], supplies[x]['quantity'], supplies[x]['description'], supplies[x]['donations'], categoryId,supplies[x]['id'], authToken)
+
           $(".supply-div").append(supplyObject.formatted())
           /*add edit and delete links if user created supply, otherwise donate form */
           if($('.prev-category').attr("user-id") == supplies[x]["user_id"]){
@@ -98,7 +101,7 @@
 
       posted.done(function(data){
 
-        var newSupply = new Supply(data.name, data.price, data.quantity, data.description, data.donations, data.category_id, data.id)
+        var newSupply = new Supply(data.name, data.price, data.quantity, data.description, data.donations, data.category_id, data.id, authToken)
         $('.supply-div').append(newSupply.formatted())
 
 

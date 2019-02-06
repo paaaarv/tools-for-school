@@ -55,7 +55,11 @@ class SuppliesController < ApplicationController
   def donate
     @supply = Supply.find(params[:supply_id])
     @category = @supply.category
-    donations = params[:supply][:donations].to_f
+    if params["supply_donations"]
+      donations= params["supply_donations"].to_f
+    else
+      donations = params[:supply][:donations].to_f
+    end
     @supply.donations += donations
     if @supply.valid_donation?
       @supply.save
