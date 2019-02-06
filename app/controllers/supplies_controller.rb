@@ -54,6 +54,7 @@ class SuppliesController < ApplicationController
   end
 
   def donate
+    binding.pry
     @supply = Supply.find(params[:supply_id])
     @category = @supply.category
     donations = params[:supply][:donations].to_f

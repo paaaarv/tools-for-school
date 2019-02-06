@@ -58,11 +58,9 @@
         $(".category-name").text(data["name"])
         var supplies = data['supplies']
         for(let x= 0; x < supplies.length; x++){
-          $(".supply-div").append("<h3 user-id=''>" + supplies[x]['name']+ "</h3><br> <h4> Price: $" + supplies[x]['price']+" | Quantity: " + supplies[x]['quantity']+ "</h4> <br>")
-
-          if(supplies[x]['description'] != null){
-            $(".supply-div").append("<p>" + supplies[x]['description'] + "</p>")
-          }
+          /* new supply object w method to format*/
+          var supplyObject = new Supply(supplies[x]['name'], supplies[x]['price'], supplies[x]['quantity'], supplies[x]['description'], supplies[x]['donations'] )
+          $(".supply-div").append(supplyObject.formatted())
           /*add edit and delete links if user created supply, otherwise donate form */
           if($('.prev-category').attr("user-id") == supplies[x]["user_id"]){
           $(".supply-div").append("<a href='/categories/"+categoryId+"/supplies/"+supplies[x]["id"]+"/edit'>Edit Supply </a> || <a data-method='delete'href= '/supplies/"+supplies[x]['id']+"/destroy' delete-id = '"+ supplies[x]['id']+"'class='delete-supply'> Delete Supply </button>")
@@ -86,20 +84,22 @@
       })
     })
 
-
+    /* if user is an admin, has ability to add supply*/
     $(".add-supply").on("click", function(){
       $(".supply-form").css('visibility','visible')
     })
+
     /*posting a new supply dynamically function*/
-    $("form").submit(function(event){
+    $(".new_supply").submit(function(event){
       event.preventDefault();
       var categoryFormId = $(".prev-category").attr("data-id")
       var values = $(this).serialize();
       var posted = $.post( '/categories/' + categoryFormId + '/supplies', values)
 
       posted.done(function(data){
-        var supply = data
-        $('.supply-div').append("<h3 user-id=''>" + document.getElementById("supply_name").value+ "</h3><br> <h4> Price: $" + document.getElementById("supply_price").value+" | Quantity: " + document.getElementById("supply_quantity").value+ "</h4> <br> ")
+      
+        var newSupply = new Supply(data.name, data.price, data.quantity, data.description, data.donations)
+        $('.supply-div').append(newSupply.formatted())
 
 
       })
