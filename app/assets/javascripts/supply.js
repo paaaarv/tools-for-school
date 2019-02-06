@@ -29,4 +29,11 @@ class Supply{
 
     }
 
+    shortFormat(){
+      return (
+        `<p>${this.name} | $ ${this.price} <br></p><br>`
+
+      )
+    }
+
 }

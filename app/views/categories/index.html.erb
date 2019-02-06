@@ -15,15 +15,24 @@
 
 
 <script type="text/javascript" charset="utf-8">
+  var categorySupply;
 $(function(){
   $(".js-more").on("click", function(){
     var id= $(this).data("id");
+    /*get category information */
     $.get("/categories/" + id + ".json", function(data) {
       var supplies = data.supplies ;
+      console.log(supplies)
       var list = document.getElementById("category-supplies-" + id)
       list.innerHTML = ""
-      supplies.forEach(function(supply){
-        list.innerHTML+='<p>' + supply.name + ' | $' + supply.price + '<br></p><br>'
+      /* print out a short edited form of each supply in the category*/ 
+      supplies.forEach(function(data){
+        console.log(data)
+        if(data.description == null){
+          data.description = " - "
+        }
+        categorySupply = new Supply(data.name, data.price, data.quantity, data.description. id, data.id)
+        list.innerHTML+= categorySupply.shortFormat()
       });
     });
   });
