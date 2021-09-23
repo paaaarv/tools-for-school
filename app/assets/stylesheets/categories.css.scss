@@ -2,17 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+.category{
+    display:inline-block;
+}
 h3 {
-  font-family: "Shadows Into Light", cursive;
-  font-size: 60px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 30px;
   color: #004d99;
   margin-left: 20px;
 
 }
 
 p{
-font-family: "Amatic SC", cursive;
+font-family: "Open Sans Condensed", sans-serif;
 font-size: 30px;
 color: black;
 margin-left: 20px;

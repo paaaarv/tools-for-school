@@ -1,15 +1,16 @@
 
-<h1 id="toolsforschool"> Tools For School </h1>
 
 
 <% @categories.each do |category|%>
-<h3 id="category-<%category.id%>"><%= category.name %></h3>
+<div class="category">
+<%=image_tag "#{category.name}.png" %>
+<h3 id="category-<%=category.id%>"><%= category.name %></h3>
 
 <div id="category-supplies-<%=category.id%>">
 </div>
 <button class="js-more" data-id="<%=category.id%>">See <%= category.name%></button>
 <button><%= link_to "Donate towards #{category.name}", category_path(category)%> </button>
-
+</div>
 <%end%>
 
 
